@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../../models");
+const jwt = require('jsonwebtoken')
 
 // Get all users
 router.get("/", async (req, res) => {
@@ -45,7 +46,20 @@ router.post("/", async (req, res) => {
     };
 
     const dbData = await User.create(newUser);
-    return res.json(dbData)
+
+    const token = jwt.sign({
+      userId: dbData.userId,
+      userName: dbData.userName,
+    },process.env.JWT_SECRET,{
+      expiresIn:"2h"
+  })
+  console.log("token:", token)
+  
+
+    return res.json({
+      token,
+      user:dbData
+    })
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: "Could not create user", err: err });
