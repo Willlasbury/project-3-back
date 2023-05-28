@@ -1,13 +1,17 @@
 const express = require('express');
 const allRoutes = require('./controllers');
-const sequelize = require('./config/connection');
+
+const sequelize = require('./config');
+
+// allow cross-origin resource sharing (CORS)
 const cors = require("cors")
-//TODO: allow cross-origin resource sharing (CORS)
 
 // Sets up the Express App
 // =============================================================
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
 // Requiring our models for syncing
 const { User} = require('./models');
 
