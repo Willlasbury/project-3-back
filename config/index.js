@@ -3,6 +3,10 @@ require('dotenv').config();
 
 let sequelize;
 
+console.log('===\n\n\ntest\n\n\n===')
+console.log("process.env.DB_NAME:", process.env.DB_PASSWORD)
+console.log('===\n\n\ntest\n\n\n===')
+
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
