@@ -11,7 +11,6 @@ const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-console.log('===\n\n\ntest\n\n\n===')
 // Requiring our models for syncing
 const { User} = require('./models');
 
