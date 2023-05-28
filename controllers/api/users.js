@@ -5,10 +5,11 @@ const User = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const dbData = await User.findAll();
-
+    console.log('===\n\n\ntest\n\n\n===')
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }
+    console.log("dbData:", dbData)
       return res.json(dbData);
     
   } catch (err) {
@@ -37,12 +38,13 @@ router.get("/:id", async (req, res) => {
 // Create user
 router.post("/", async (req, res) => {
   try {
+  
     const newUser = {
       username: req.body.userName,
       password: req.body.password,
     };
+
     const dbData = await User.create(newUser);
-  
     return res.json(dbData)
   } catch (err) {
     console.log(err);
