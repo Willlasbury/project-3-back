@@ -1,17 +1,19 @@
-const { Server } = require("socket.io")
-const URL = `http://localhost:3001`
+const { Server } = require("socket.io");
 
-const socketConnection = (app) =>{
+// Change client URL as necessary
+const URL = `http://localhost:3001`;
 
-    const http = require("http");
-    const server = http.createServer(app);
+// create our backend socket utility and return the socket info and the server info
+const socketConnection = (app) => {
+  const http = require("http");
+  const server = http.createServer(app);
 
-    const io = new Server(server, {
-        cors: {
-            origin: URL
-        }
-    })
-    return {io, server}
-}
+  const io = new Server(server, {
+    cors: {
+      origin: URL,
+    },
+  });
+  return { io, server };
+};
 
-module.exports = socketConnection
+module.exports = socketConnection;
