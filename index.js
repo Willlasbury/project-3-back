@@ -12,28 +12,24 @@ const PORT = process.env.PORT || 3000;
 // =============================================================
 
 // set up socket.io
-const http = require("http");
-const server = http.createServer(app);
+// const http = require("http");
+// const server = http.createServer(app);
 const socket = require("./config/socket");
-const io = socket(server);
+const { io, server } = socket(app);
 
 io.on("connection", (socket) => {
   // when a user connects
   console.log("socket:", socket.id);
-  
-  socket.on("test", () => {
-    console.log("===\n\n\ntest\n\n\n===");
-    console.log("hi");
-  
-    console.log("===\n\n\ntest\n\n\n===");
-  });
-});
 
+  const sayHi = require("./controllers/socket/sayHi");
+  socket.on("Hi", sayHi);
+});
 
 // =============================================================
 
 // Requiring our models for syncing
-const { User } = require("./models");
+const { User, belongsTo } = require("./models");
+const { log } = require("console");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
