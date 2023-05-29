@@ -14,13 +14,17 @@ const PORT = process.env.PORT || 3000;
 // set up socket.io
 const http = require('http')
 const server = http.createServer(app)
-const { Server } = require("socket.io")
+const socket = require('./config/socket')
+const io = socket(server)
 
-const io = new Server(server, {
-    cors: {
-      origin: `http://localhost:3001`
-    }
-  })
+io.on("connection", (socket) => {
+    // when a user connects
+    console.log(
+        "You are now connected. This socket ID is unique everytime: " +
+            socket.id
+    );})
+
+
 
 // =============================================================
 
