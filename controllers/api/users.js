@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../../models");
+const User = require("../../models/Users");
 const jwt = require('jsonwebtoken')
 
 // Get all users
@@ -39,10 +39,10 @@ router.get("/:id", async (req, res) => {
 // Create user
 router.post("/", async (req, res) => {
   try {
-  
     const newUser = {
-      username: req.body.userName,
+      username: req.body.username,
       password: req.body.password,
+      email: req.body.email,
     };
 
     const dbData = await User.create(newUser);
@@ -65,5 +65,46 @@ router.post("/", async (req, res) => {
     return res.status(500).json({ msg: "Could not create user", err: err });
   }
 });
+  //Update User
+  router.put("/:id", (req, res) => {
+    User.update(
+      {
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+      .then((editUser) => {
+        if (!editUser[0]) {
+          return res
+            .status(404)
+            .json({ msg: "no User with this id in database!" });
+        }
+        res.json(editUser);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ msg: "error occurred", err });
+      });
+  });
+ //Delete User
+ router.delete('/:id', (req, res) => {
+  // delete a user by its `id` value
+  User.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+  .then((deletedUser)=>{
+    res.json(deletedUser);
+  })
+  .catch((err) => res.json(err));
+})
+
 
 module.exports = router;
