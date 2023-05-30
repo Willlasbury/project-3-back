@@ -25,7 +25,7 @@ io.on("connection", socket => useSocket(socket))
 // =============================================================
 
 // Requiring our models for syncing
-const { User, belongsTo } = require("./models");
+const { User } = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
