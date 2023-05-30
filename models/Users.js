@@ -20,10 +20,22 @@ User.init({
     },
     email: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
         validate: {
             isEmail:true
         }
+    },
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    seller_rating:{
+        type: DataTypes.INTEGER(1,5),
+        defaultValue: 5,
+        allowNull: false,
     }
 
 },{
