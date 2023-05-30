@@ -4,7 +4,7 @@ const { Server } = require("socket.io");
 // const URL = `http://localhost:3001`;
 
 // deployment url
-const URL = 'https://traderz-post.herokuapp.com/'
+const URL = 'golden-semifreddo-f14d90.netlify.app'
 
 // create our backend socket utility and return the socket info and the server info
 const socketConnection = (app) => {
