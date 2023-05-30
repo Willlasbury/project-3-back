@@ -1,7 +1,10 @@
 const { Server } = require("socket.io");
 
 // Change client URL as necessary
-const URL = `http://localhost:3001`;
+// const URL = `http://localhost:3001`;
+
+// deployment url
+const URL = 'https://traderz-post.herokuapp.com/'
 
 // create our backend socket utility and return the socket info and the server info
 const socketConnection = (app) => {
