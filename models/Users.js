@@ -26,18 +26,11 @@ User.init({
             isEmail:true
         }
     },
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
     seller_rating:{
         type: DataTypes.INTEGER(1,5),
         defaultValue: 5,
         allowNull: false,
-    }
-
+    },
 },{
     sequelize,
     hooks:{

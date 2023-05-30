@@ -36,6 +36,7 @@ Item.init(
     },
     created_at: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
     sold_status: {
