@@ -13,15 +13,13 @@ const PORT = process.env.PORT || 3000;
 
 // set up socket.io
 
+// import the config file to set up socket
 const socket = require("./config/socket");
 const { io, server } = socket(app);
 
-io.on("connection", (socket) => {
-  console.log("socket:", socket.id);
-
-  const sayHi = require("./controllers/socket/sayHi");
-  socket.on("Hi", sayHi);
-});
+// the useSocket function holds all responses for the server
+const useSocket = require("./controllers/socket")
+io.on("connection", socket => useSocket(socket))
 
 // =============================================================
 
