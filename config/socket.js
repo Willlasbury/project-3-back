@@ -1,10 +1,10 @@
 const { Server } = require("socket.io");
 
 // Change client URL as necessary
-// const URL = `http://localhost:3001`;
+// const URL = `http://localhost:3000`;
 
 // deployment url
-const URL = 'golden-semifreddo-f14d90.netlify.app'
+const URL = 'https://traderz-post.netlify.app/'
 
 // create our backend socket utility and return the socket info and the server info
 const socketConnection = (app) => {
