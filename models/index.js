@@ -7,10 +7,12 @@ User.hasMany(Item, {
     onDelete: 'CASCADE'
 });
 
-Item.belongsTo(User,{
-    foreignKey: 'user_id'
+Item.belongsTo(User, {
+    as: "Seller",
+    foreignKey: 'seller_id'
 })
 
-Item.belongsTo(User,{
-    foreignKey: 'buyer_id'
-})
+// Item.belongsTo(User, {
+//     as: "Buyer",
+//     // foreignKey: 'buyer_id'
+// })
