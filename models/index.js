@@ -1,7 +1,8 @@
 const User = require("./Users")
 const Item = require('./Item')
+const Photo = require('./Photos')
+const Category = require('./Category')
 
-module.exports = {User, Item}
 
 Item.belongsTo(User, {
     as: "Seller",
@@ -12,3 +13,16 @@ Item.belongsTo(User, {
     as: "Buyer",
     foreignKey: 'buyer_id'
 })
+
+Photo.belongsTo(Item, {
+    as: "Photo",
+    foreignKey: "item_id"
+})
+
+Category.belongsTo(Item, {
+    as: "Category",
+    foreignKey: "item_id"
+})
+
+
+module.exports = {User, Item, Photo, Category}
