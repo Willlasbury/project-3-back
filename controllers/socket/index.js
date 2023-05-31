@@ -4,9 +4,8 @@ const useSocket = (socket) => {
     const sayHi = require("./sayHi");
     socket.on("Hi", sayHi);
 
-    socket.on('do-math', () => {
-        console.log(1+1)
-    })
+    const handleMessage = require('./handleMessage')
+    socket.on("message", (data) => handleMessage(data, socket))
 }
 
 module.exports = useSocket
