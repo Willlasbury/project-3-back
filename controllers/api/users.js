@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../../models/Users");
+const {User, Item} = require("../../models");
 const jwt = require("jsonwebtoken");
 
 // Get all users
@@ -61,7 +61,8 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ msg: "Could not create user", err: err });
+    console.log('===\n\n\ntest\n\n\n===')
+    return res.status(500).json({ msg: "Could not create user", err });
   }
 });
 //Update User
@@ -104,5 +105,21 @@ router.delete("/:id", (req, res) => {
     })
     .catch((err) => res.json(err));
 });
+
+router.get("/verifytoken",(req,res)=>{
+  const token = req.headers.authorization?.split(" ")[1];
+  try {
+      const data = jwt.verify(token,process.env.JWT_SECRET)
+      User.findByPk(data.userId,{
+          include:[Item]
+      }).then(foundUser=>{
+          res.json(foundUser)
+      })
+  } catch (err) {
+      console.log(err);
+      res.status(403).json({msg:"bad token",err})
+  }
+})
+
 
 module.exports = router;
