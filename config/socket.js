@@ -7,9 +7,9 @@ const URL = `http://localhost:3000`;
 // const URL = 'https://traderz-post.netlify.app/'
 
 // create our backend socket utility and return the socket info and the server info
-const socketConnection = (app) => {
+const socketConnection = () => {
   const http = require("http");
-  const server = http.createServer(app);
+  const server = http.createServer();
 
   const io = new Server(server, {
     cors: {
