@@ -1,6 +1,7 @@
-function handleMessage (data, socket) {
-    console.log("data:", data)
-    socket.emit("messageResponse", data)
+const datas = []
+function handleMessage (data, io) {
+    io.emit("messageResponse", data)
+    datas.push(data)
    }
    
    module.exports = handleMessage

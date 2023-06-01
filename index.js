@@ -20,7 +20,10 @@ const { io, server } = socket(app);
 
 // the useSocket function holds all responses for the server
 const useSocket = require("./controllers/socket")
-io.on("connection", socket => useSocket(socket))
+io.on("connection", socket => useSocket(io, socket))
+
+
+
 
 // =============================================================
 
