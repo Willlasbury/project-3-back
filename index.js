@@ -22,9 +22,6 @@ const { io, server } = socket(app);
 const useSocket = require("./controllers/socket")
 io.on("connection", socket => useSocket(io, socket))
 
-
-
-
 // =============================================================
 
 // Requiring our models for syncing
