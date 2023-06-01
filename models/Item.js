@@ -14,27 +14,13 @@ Item.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     minimum_trade: {
       type: DataTypes.INTEGER(1, 10),
       allowNull: false,
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     condition: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    photo: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
     sold_status: {
