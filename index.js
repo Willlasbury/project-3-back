@@ -11,7 +11,6 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 // =============================================================
 
-
 // set up socket.io
 
 // import the config file to set up socket
@@ -19,8 +18,8 @@ const socket = require("./config/socket");
 const { io, server } = socket(app);
 
 // the useSocket function holds all responses for the server
-const useSocket = require("./controllers/socket")
-io.on("connection", socket => useSocket(io, socket))
+const useSocket = require("./controllers/socket");
+io.on("connection", (socket) => useSocket(io, socket));
 
 // =============================================================
 
