@@ -23,12 +23,12 @@ router.get("/:id", async (req, res) => {
       const dbData = await Category.findByPk(categoryId);
   
       if (!dbData) {
-        return res.status(404).json({ msg: "User not found!" });
+        return res.status(404).json({ msg: "category not found!" });
       }
       return res.json(dbData);
     } catch (err) {
       console.log(err);
-      return res.status(500).json({ msg: "could not get user", err: err });
+      return res.status(500).json({ msg: "could not get category", err: err });
     }
   });
   //Create Category
