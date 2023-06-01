@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const {User, Item} = require("../../models");
+const { User, Item } = require("../../models");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt')
 
 // Get all users
 router.get("/", async (req, res) => {
@@ -61,10 +62,52 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    console.log('===\n\n\ntest\n\n\n===')
+    console.log("===\n\n\ntest\n\n\n===");
     return res.status(500).json({ msg: "Could not create user", err });
   }
 });
+
+// login
+router.post("/login", (req, res) => {
+  console.log("req.body: ", req.body);
+  User.findOne({
+    where: {
+      username: req.body.userName,
+    },
+  })
+    .then((foundUser) => {
+      console.log(foundUser);
+      if (!foundUser) {
+        return res.status(401).json({ msg: "invalid login" });
+      } else if (!bcrypt.compareSync(req.body.password, foundUser.password)) {
+        return res.status(401).json({ msg: "invalid login" });
+      } else {
+        const token = jwt.sign(
+          {
+            username: foundUser.username,
+            userId: foundUser.id,
+          },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "2h",
+          }
+        );
+        console.log("token:", token)
+        return res.json({
+          token,
+          user: foundUser,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        msg: "error",
+        err,
+      });
+    });
+});
+
 //Update User
 router.put("/:id", (req, res) => {
   User.update(
@@ -106,20 +149,19 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.get("/verifytoken",(req,res)=>{
+router.get("/verifytoken", (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
   try {
-      const data = jwt.verify(token,process.env.JWT_SECRET)
-      User.findByPk(data.userId,{
-          include:[Item]
-      }).then(foundUser=>{
-          res.json(foundUser)
-      })
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    User.findByPk(data.userId, {
+      include: [Item],
+    }).then((foundUser) => {
+      res.json(foundUser);
+    });
   } catch (err) {
-      console.log(err);
-      res.status(403).json({msg:"bad token",err})
+    console.log(err);
+    res.status(403).json({ msg: "bad token", err });
   }
-})
-
+});
 
 module.exports = router;
