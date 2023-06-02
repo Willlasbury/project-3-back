@@ -26,7 +26,7 @@ const startSeedin = async () => {
       itemData[i].setCategory(category);
 
       // randomly assign buyers to only some items
-      if (Math.floor(Math.random() * 2) - 1) {
+      if (Math.floor(Math.random()*2)) {
         const buyer = await User.findByPk(Math.floor(Math.random() * 9));
         itemData[i].setBuyer(buyer);
       }
