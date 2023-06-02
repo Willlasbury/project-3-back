@@ -27,23 +27,19 @@ Item.belongsTo(User, {
 
 // ITEM.CATEGORY KEY
 Category.hasMany(Item, {
-  as: "Category",
   foreignKey: "category_id",
 });
 
 Item.belongsTo(Category, {
-  as: "Category",
   foreignKey: "category_id",
 });
 
 // PHOTO.ITEM KEY
 Item.hasMany(Photo, {
-  as: "Item",
   foreignKey: "item_id",
 });
 
 Photo.belongsTo(Item, {
-  as: "Item",
   foreignKey: "item_id",
 });
 

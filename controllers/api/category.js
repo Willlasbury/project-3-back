@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const {Category,Item} = require('../../models')
+const {Category,Item, Photo} = require('../../models')
 
 // Get all categories
 router.get("/", async (req, res) => {
     try {
-      const dbData = await Category.findAll();
+      const dbData = await Category.findAll({include: [{model:Item, include: [Photo]}]});
       console.log("===\n\n\ntest\n\n\n===");
       if (dbData.length === 0) {
         return res.status(404).json({ msg: "no Categories in database!" });
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
       const categoryId = req.params.id;
-      const dbData = await Category.findByPk(categoryId);
+      const dbData = await Category.findByPk(categoryId, {include: [{model:Item, include: [Photo]}]});
   
       if (!dbData) {
         return res.status(404).json({ msg: "category not found!" });
