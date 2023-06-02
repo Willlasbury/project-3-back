@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Photo, Item} = require("../../models");
+const {Photo, User, Item} = require("../../models");
 // Get all photos
 router.get("/", async (req, res) => {
     try {
@@ -33,11 +33,16 @@ router.get("/:id", async (req, res) => {
   //Create a Photo
   router.post("/", async (req, res) => {
     try {
+      const itemId = req.body.item_id;
+      console.log("Item Id clog", itemId);
+      const item = await Item.findByPk(itemId);
+      console.log("Item clog", item);
       const newPhoto = {
         url: req.body.url
       };
   
       const dbData = await Photo.create(newPhoto);
+      dbData.setItem(item);
   
       return res.json({
         photo: dbData,
