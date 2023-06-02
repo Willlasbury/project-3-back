@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { User, Item } = require("../../models");
+const { User, Item, Photo } = require("../../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt')
 
 // Get all users
 router.get("/", async (req, res) => {
   try {
-    const dbData = await User.findAll();
+    const dbData = await User.findAll({include: [{model:Item, as: "Seller", include: [Photo]}]});
     console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const dbData = await User.findByPk(userId);
+    const dbData = await User.findByPk(userId,{include: [{model:Item, as: "Seller", include: [Photo]}]});
 
     if (!dbData) {
       return res.status(404).json({ msg: "User not found!" });
@@ -109,7 +109,7 @@ router.post("/login", (req, res) => {
 });
 
 //Update User
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   User.update(
     {
       username: req.body.username,
