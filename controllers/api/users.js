@@ -7,15 +7,29 @@ const bcrypt = require('bcrypt')
 router.get("/", async (req, res) => {
   try {
     const dbData = await User.findAll({include: [{model:Item, as: "Seller", include: [Photo]}]});
-    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }
-    console.log("dbData:", dbData);
     return res.json(dbData);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: "could not get users", err: err });
+  }
+});
+
+router.get("/verifytoken", (req, res) => {
+  try {
+  const token = req.headers.authorization?.split(" ")[1];
+  
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    User.findByPk(data.userId, {
+      include: [Item],
+    }).then((foundUser) => {
+      res.json(foundUser);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(403).json({ msg: "bad token", err });
   }
 });
 
@@ -35,7 +49,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Create user
+// Create user/ signup
 router.post("/", async (req, res) => {
   try {
     const newUser = {
@@ -44,39 +58,35 @@ router.post("/", async (req, res) => {
       email: req.body.email,
     };
     const dbData = await User.create(newUser);
-
     const token = jwt.sign(
       {
-        userId: dbData.userId,
-        userName: dbData.userName,
+        userId: dbData.id,
+        username: dbData.username,
       },
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
       }
     );
-
+      const revealToken = jwt.verify(token, process.env.JWT_SECRET)
     return res.json({
       token,
       user: dbData,
     });
   } catch (err) {
     console.log(err);
-    console.log("===\n\n\ntest\n\n\n===");
     return res.status(500).json({ msg: "Could not create user", err });
   }
 });
 
 // login
 router.post("/login", (req, res) => {
-  console.log("req.body: ", req.body);
   User.findOne({
     where: {
       username: req.body.userName,
     },
   })
     .then((foundUser) => {
-      console.log(foundUser);
       if (!foundUser) {
         return res.status(401).json({ msg: "invalid login" });
       } else if (!bcrypt.compareSync(req.body.password, foundUser.password)) {
@@ -92,7 +102,6 @@ router.post("/login", (req, res) => {
             expiresIn: "2h",
           }
         );
-        console.log("token:", token)
         return res.json({
           token,
           user: foundUser,
@@ -149,19 +158,6 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.get("/verifytoken", (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  try {
-    const data = jwt.verify(token, process.env.JWT_SECRET);
-    User.findByPk(data.userId, {
-      include: [Item],
-    }).then((foundUser) => {
-      res.json(foundUser);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(403).json({ msg: "bad token", err });
-  }
-});
+
 
 module.exports = router;

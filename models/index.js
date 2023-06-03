@@ -4,10 +4,7 @@ const Photo = require("./Photos");
 const Category = require("./Category");
 
 // ITEM.SELLER KEY
-User.hasMany(Item, {
-  as: "Seller",
-  foreignKey: "seller_id",
-});
+User.hasMany(Item);
 
 Item.belongsTo(User, {
   as: "Seller",
@@ -15,10 +12,7 @@ Item.belongsTo(User, {
 });
 
 // ITEM.BUYER KEY
-User.hasMany(Item, {
-  as: "Buyer",
-  foreignKey: "buyer_id",
-});
+User.hasMany(Item);
 
 Item.belongsTo(User, {
   as: "Buyer",
@@ -26,18 +20,14 @@ Item.belongsTo(User, {
 });
 
 // ITEM.CATEGORY KEY
-Category.hasMany(Item, {
-  foreignKey: "category_id",
-});
+Category.hasMany(Item);
 
 Item.belongsTo(Category, {
   foreignKey: "category_id",
 });
 
 // PHOTO.ITEM KEY
-Item.hasMany(Photo, {
-  foreignKey: "item_id",
-});
+Item.hasMany(Photo);
 
 Photo.belongsTo(Item, {
   foreignKey: "item_id",
