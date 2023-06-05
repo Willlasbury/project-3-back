@@ -25,7 +25,7 @@ router.get("/verifytoken", (req, res) => {
   
     const data = jwt.verify(token, process.env.JWT_SECRET);
     User.findByPk(data.userId, {
-      include: [Item],
+      include: {model: Item, as: "Seller"},
     }).then((foundUser) => {
       res.json(foundUser);
     });

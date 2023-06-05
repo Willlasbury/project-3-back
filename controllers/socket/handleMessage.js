@@ -1,7 +1,8 @@
-const datas = [];
+const messages = [];
 function handleMessage(data, io) {
   io.emit("messageResponse", data);
-  datas.push(data);
+  messages.push(data);
+  console.log("messages:", messages)
 }
 
 module.exports = handleMessage;
