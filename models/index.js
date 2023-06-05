@@ -6,18 +6,18 @@ const Category = require("./Category");
 // ITEM.SELLER KEY
 User.hasMany(Item);
 
-Item.belongsTo(User, {
-  as: "Seller",
-  foreignKey: "seller_id",
-});
+// Item.belongsTo(User, {
+//   as: "Seller",
+//   foreignKey: "seller_id",
+// });
 
-// ITEM.BUYER KEY
-User.hasMany(Item);
+// // ITEM.BUYER KEY
+// User.hasMany(Item);
 
-Item.belongsTo(User, {
-  as: "Buyer",
-  foreignKey: "buyer_id",
-});
+// Item.belongsTo(User, {
+//   as: "Buyer",
+//   foreignKey: "buyer_id",
+// });
 
 // ITEM.CATEGORY KEY
 Category.hasMany(Item);
