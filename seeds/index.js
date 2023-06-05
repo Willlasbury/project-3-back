@@ -52,7 +52,11 @@ const startSeedin = async () => {
       const sender = await User.findByPk(randNum);
       const recipient = await User.findByPk(diffNum);
       await messageData[i].setSender(sender);
-      await messageData[i].setRecipient(recipient);
+      if (i <= 4) {
+        await messageData[i].setRecipient(4);
+      } else {
+        await messageData[i].setRecipient(recipient);
+      }
     }
     process.exit(0);
   } catch (err) {
