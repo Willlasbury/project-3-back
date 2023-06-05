@@ -6,7 +6,9 @@ const bcrypt = require('bcrypt')
 // Get all users
 router.get("/", async (req, res) => {
   try {
-    const dbData = await User.findAll({include: [{model:Item, as: "Seller", include: [Photo]}]});
+    console.log('===\n\n\ntest\n\n\n===')
+    const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
+    console.log("dbData:", dbData)
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }
@@ -23,7 +25,7 @@ router.get("/verifytoken", (req, res) => {
   
     const data = jwt.verify(token, process.env.JWT_SECRET);
     User.findByPk(data.userId, {
-      include: [Item],
+      include: {model: Item, as: "Seller"},
     }).then((foundUser) => {
       res.json(foundUser);
     });
@@ -46,6 +48,27 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: "could not get user", err: err });
+  }
+});
+//Get items from other users, but not current user on browse page
+router.get("/otherusers/browse", async (req, res) => {
+  try {
+    console.log('===\n\n\ntest\n\n\n===')
+    const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
+    console.log("dbData:", dbData)
+    if (dbData.length === 0) {
+      return res.status(404).json({ msg: "no Users in database!" });
+    }
+    console.log(dbData.length);
+    for(var i =0; i<dbData.length; i++){
+      if(req.body.username === dbData[i].username){
+        dbData.splice(i,1);
+      }
+    }
+    return res.json(dbData);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "could not get users", err: err });
   }
 });
 
