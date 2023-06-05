@@ -6,7 +6,9 @@ const bcrypt = require('bcrypt')
 // Get all users
 router.get("/", async (req, res) => {
   try {
-    const dbData = await User.findAll({include: [{model:Item, as: "Seller", include: [Photo]}]});
+    console.log('===\n\n\ntest\n\n\n===')
+    const dbData = await User.findAll({include: {model: Item, as: "Seller"}});
+    console.log("dbData:", dbData)
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }

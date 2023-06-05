@@ -5,10 +5,10 @@ const Category = require("./Category");
 const Message = require("./Message");
 
 // MESSAGE.SENDER KEY
-// User.hasMany(Message, {
-//   as: "Sender",
-//   foreignKey: "sender_id"
-// })
+User.hasMany(Message, {
+  as: "Sender",
+  foreignKey: "sender_id"
+})
 
 Message.belongsTo(User, {
   as: "Sender",
@@ -16,10 +16,10 @@ Message.belongsTo(User, {
 })
 
 // MESSAGE.RECIPIENT KEY
-// User.hasMany(Message, {
-//   as: "Recipient",
-//   foreignKey: "recipient_id"
-// })
+User.hasMany(Message, {
+  as: "Recipient",
+  foreignKey: "recipient_id"
+})
 
 Message.belongsTo(User, {
   as: "Recipient",
@@ -27,10 +27,10 @@ Message.belongsTo(User, {
 })
 
 // ITEM.SELLER KEY
-// User.hasMany(Item, {
-//   as: "Seller",
-//   foreignKey: "seller_id",
-// });
+User.hasMany(Item, {
+  as: "Seller",
+  foreignKey: "seller_id",
+});
 
 Item.belongsTo(User, {
   as: "Seller",
@@ -38,10 +38,10 @@ Item.belongsTo(User, {
 });
 
 // ITEM.BUYER KEY
-// User.hasMany(Item, {
-//   as: "Buyer",
-//   foreignKey: "buyer_id",
-// });
+User.hasMany(Item, {
+  as: "Buyer",
+  foreignKey: "buyer_id",
+});
 
 Item.belongsTo(User, {
   as: "Buyer",
@@ -49,12 +49,12 @@ Item.belongsTo(User, {
 });
 
 // ITEM.CATEGORY KEY
-// Category.hasMany(Item);
+Category.hasMany(Item);
 
 Item.belongsTo(Category)
 
 // PHOTO.ITEM KEY
-// Item.hasMany(Photo);
+Item.hasMany(Photo);
 
 Photo.belongsTo(Item)
 
