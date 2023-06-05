@@ -43,10 +43,10 @@ User.hasMany(Item, {
   foreignKey: "buyer_id",
 });
 
-// Item.belongsTo(User, {
-//   as: "Buyer",
-//   foreignKey: "buyer_id",
-// });
+Item.belongsTo(User, {
+  as: "Buyer",
+  foreignKey: "buyer_id",
+});
 
 // ITEM.CATEGORY KEY
 Category.hasMany(Item);
