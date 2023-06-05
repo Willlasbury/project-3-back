@@ -1,17 +1,18 @@
+const users = {}
+const getTokenInfo = require('../utils/getTokenInfo')
+
 const useSocket = (io, socket) => {
-    console.log("socket:", socket.id);
-  
-    const sayHi = require("./sayHi");
-    socket.on("Hi", sayHi);
+  // console.log("socket:", socket.id);
+  const handleMessage = require("./handleMessage");
+  socket.on("message", (data) => handleMessage(data, io));
 
-    socket.emit('hi')
+  // const joinRoom = require('./joinRoom')
+  // socket.on('join-room', (data) => joinRoom(data, socket))
 
-    const handleMessage = require('./handleMessage')
-    socket.on("message", (data) => handleMessage(data, io))
+    socket.on("add_user", (data) => {
+    const userInfo = getTokenInfo(data.token);
+    users[userInfo.userId] = data.socket;
+  });
+};
 
-    const joinRoom = require('./joinRoom')
-    socket.on('join-room', (data) => joinRoom(data, socket))
-    
-}
-
-module.exports = useSocket
+module.exports = useSocket;
