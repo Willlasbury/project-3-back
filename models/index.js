@@ -5,26 +5,26 @@ const Category = require("./Category");
 const Message = require("./Message");
 
 // MESSAGE.SENDER KEY
-User.hasMany(Message, {
-  as: "Sender",
-  foreignKey: "sender_id"
-})
-
-// Message.belongsTo(User, {
+// User.hasMany(Message, {
 //   as: "Sender",
 //   foreignKey: "sender_id"
 // })
 
-// MESSAGE.RECIPIENT KEY
-User.hasMany(Message, {
-  as: "Recipient",
-  foreignKey: "recipient_id"
+Message.belongsTo(User, {
+  as: "Sender",
+  foreignKey: "sender_id"
 })
 
-// Message.belongsTo(User, {
+// MESSAGE.RECIPIENT KEY
+// User.hasMany(Message, {
 //   as: "Recipient",
 //   foreignKey: "recipient_id"
 // })
+
+Message.belongsTo(User, {
+  as: "Recipient",
+  foreignKey: "recipient_id"
+})
 
 // ITEM.SELLER KEY
 // User.hasMany(Item, {
@@ -58,4 +58,4 @@ Item.belongsTo(Category)
 
 Photo.belongsTo(Item)
 
-module.exports = { User, Item, Photo, Category };
+module.exports = { User, Item, Photo, Category, Message };

@@ -16,4 +16,5 @@ Message.init(
   },
   { sequelize }
 );
+
 module.exports = Message;
