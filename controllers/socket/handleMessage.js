@@ -13,6 +13,7 @@ async function handleMessage (data, io) {
   message.setSender(senderInfo.userId)
 
   io.emit("messageResponse", data);
+  
 }
 
 module.exports = handleMessage;
