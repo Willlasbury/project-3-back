@@ -61,7 +61,8 @@ items = [
         category: 'other',
         condition: 'like new',
         photo: null,
-        sold_status: false
+        sold_status: false,
+        
     },
     {
         title:'monitor',
@@ -69,7 +70,8 @@ items = [
         category: 'electronics',
         condition: 'used',
         photo: null,
-        sold_status: false
+        sold_status: false,
+        item_id:1
     },
     {
         title:'Dewalt drill',
@@ -77,7 +79,8 @@ items = [
         category: 'tools',
         condition: 'used',
         photo: null,
-        sold_status: false
+        sold_status: false,
+        item_id:1
     },
 
 ]
