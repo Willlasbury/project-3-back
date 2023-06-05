@@ -3,6 +3,7 @@ const Item = require("./Item");
 const Photo = require("./Photos");
 const Category = require("./Category");
 const Message = require("./Message");
+const Bid = require('./Bid');
 
 // MESSAGE.SENDER KEY
 User.hasMany(Message, {
@@ -58,4 +59,22 @@ Item.hasMany(Photo);
 
 Photo.belongsTo(Item)
 
-module.exports = { User, Item, Photo, Category, Message };
+// Bid Associations
+User.hasMany(Bid, {
+  as: "Offerer",
+  foreignKey:"offerer_id"
+});
+Bid.belongsTo(User, {
+  as: "Offerer",
+  foreignKey:"offerer_id"
+});
+Item.hasMany(Bid, {
+  as: "Offering",
+  foreignKey:"offering_id"
+});
+Bid.belongsTo(Item, {
+  as: "Offering",
+  foreignKey:"offering_id"
+});
+
+module.exports = { User, Item, Photo, Category, Message, Bid };
