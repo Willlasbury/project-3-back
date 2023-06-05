@@ -11,6 +11,13 @@ Photo.init(
       unique: true,
       allowNull: false,
     },
+    item_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Items",
+        key: "id",
+      },
+    },
   },
   { sequelize }
 );
