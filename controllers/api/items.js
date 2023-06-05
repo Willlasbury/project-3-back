@@ -37,7 +37,9 @@ router.get("/:id", async (req, res) => {
 router.get("/photo/:id", async (req, res) => {
   try {
     const photoId = req.params.id;
-    const dbData = await Photo.findByPk(photoId, { include: [{ model: Item }] });
+    const dbData = await Photo.findByPk(photoId, {
+      include: [{ model: Item }],
+    });
 
     if (!dbData) {
       return res.status(404).json({ msg: "Item not found!" });
@@ -61,18 +63,29 @@ router.post("/", async (req, res) => {
       minimum_trade: req.body.minimum_trade,
       condition: req.body.condition,
     };
-    //if want to add multiple would have to make a bulk create where urls are added into an array and then mapping over it. Include an array in the request body and if there are multiple photos do a single.
+    //if want to add multiple would have to make a bulk create where urls are added into an array and then mapping over it. Include an array in the request body and if there are multiple photos do a bulk
     const dbData = await Item.create(newItem);
+    const photoArr = [];
     const newPhoto = {
       url: req.body.url,
       item_id: dbData.id,
     };
-    const dbPhotoData = await Photo.create(newPhoto);
+    const token = req.body.token;
+
+    const myData = req.body.url.map(async (url) => {
+      console.log("url:", url);
+      const photo = await Photo.create({ url: url });
+      console.log("photo:", photo);
+
+      photo.setItem(dbData);
+    });
+
+    // const dbPhotoData = await Photo.create(newPhoto);
     // dbData.setCategory(category);
 
     return res.json({
       item: dbData,
-      photo: dbPhotoData,
+      photo: myData,
     });
   } catch (err) {
     console.log(err);
