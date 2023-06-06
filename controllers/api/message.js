@@ -11,7 +11,7 @@ router.get("/:token", async (req, res) => {
       return res.json(dbData);
     } catch (err) {
       console.log(err);
-      return res.status(500).json({ msg: "could not get photos", err: err });
+      return res.status(500).json({ msg: "could not get messages", err: err });
     }
   });
 

@@ -28,6 +28,10 @@ Item.init(
       allowNull: false,
       defaultValue: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
   { sequelize }
 );

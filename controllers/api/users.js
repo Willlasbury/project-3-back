@@ -76,11 +76,12 @@ router.get("/otherusers/browse", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newUser = {
-      username: req.body.userName,
+      username: req.body.username,
       password: req.body.password,
       email: req.body.email,
     };
     const dbData = await User.create(newUser);
+
     const token = jwt.sign(
       {
         userId: dbData.id,
@@ -106,7 +107,7 @@ router.post("/", async (req, res) => {
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
-      username: req.body.userName,
+      username: req.body.username,
     },
   })
     .then((foundUser) => {
