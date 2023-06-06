@@ -39,5 +39,19 @@ router.post("/", async (req, res) => {
     }
   });
 
+  router.get("/:id",async (req, res) => {
+    try {
+        const dbData = await Offer.findAll({include:  [Item]}, {where: {seller_id: req.params.id}});
+        console.log("dbData:", dbData)
+        if (dbData.length === 0) {
+            return res.status(404).json({ msg: "no Bids in database!" });
+        }
+        console.log("dbData:", dbData);
+        return res.json(dbData);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "could not get Bids", err: err });
+    }
+}); 
 
 module.exports = router;
