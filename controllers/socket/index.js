@@ -11,13 +11,21 @@ const useSocket = (io, socket) => {
 
   // add user to list of all users
   socket.on("add_user", data => {
-    // console.log("data:", data)
-    const userInfo = getTokenInfo(data);
-    users[userInfo.userId] = data.socket;
+    console.log("data:", data)
+    if (data) {
+      const userInfo = getTokenInfo(data);
+      users[userInfo.userId] = socket.id;
+      console.log("users:", users)
+    }
   });
 
-  // socket.on('send_bid', data =>
-  //   console.log("data:", data))
+  socket.on('offer', data =>{
+    console.log("users:", users)
+    console.log("users[data.seller_id]:", users[data.seller_id])
+    io.to(users[data.seller_id]).emit("new_offer", data)
+  }
+    // io.to(data.seller_id)
+    )
 };
 
 module.exports = useSocket;
