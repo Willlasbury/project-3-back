@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../config/sequelize');
 
-class Bid extends Model {}
+class Offer extends Model {}
 
-Bid.init({
+Offer.init({
     offer: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
     
@@ -13,4 +13,4 @@ Bid.init({
     sequelize
 })
 
-module.exports = Bid;
+module.exports = Offer;
