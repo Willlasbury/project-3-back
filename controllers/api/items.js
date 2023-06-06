@@ -5,7 +5,27 @@ const jwt = require("jsonwebtoken");
 // Get all items
 router.get("/", async (req, res) => {
   try {
-    const dbData = await Item.findAll({ include: [{ model: Photo }] });
+    const dbData = await Item.findAll({
+      include: [{ model: Photo }],
+    });
+
+    console.log("===\n\n\ntest\n\n\n===");
+    if (dbData.length === 0) {
+      return res.status(404).json({ msg: "no Items in database!" });
+    }
+    console.log("dbData:", dbData);
+    return res.json(dbData);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "could not get items", err: err });
+  }
+});
+router.get("/browse", async (req, res) => {
+  try {
+    const dbData = await Item.findAll({
+      include: [{ model: Photo }],
+      where: { sold_status: false },
+    });
 
     console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
@@ -65,6 +85,8 @@ router.post("/", async (req, res) => {
     };
     //if want to add multiple would have to make a bulk create where urls are added into an array and then mapping over it. Include an array in the request body and if there are multiple photos do a bulk
     const dbData = await Item.create(newItem);
+    dbData.setSeller(user);
+    dbData.setCategory(category);
     const photoArr = [];
     const newPhoto = {
       url: req.body.url,
@@ -80,8 +102,8 @@ router.post("/", async (req, res) => {
       photo.setItem(dbData);
     });
 
-    // const dbPhotoData = await Photo.create(newPhoto);
-    // dbData.setCategory(category);
+    const dbPhotoData = await Photo.create(newPhoto);
+    dbData.setCategory(category);
 
     return res.json({
       item: dbData,
