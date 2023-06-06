@@ -83,5 +83,5 @@ Offer.belongsTo(Item, {
   as: "Item",
   foreignKey:"item_id"
 });
-
+ 
 module.exports = { User, Item, Photo, Category, Message, Offer };
