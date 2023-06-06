@@ -2,7 +2,6 @@ const users = {};
 const getTokenInfo = require("../utils/getTokenInfo");
 
 const useSocket = (io, socket) => {
-  // console.log("socket:", socket.id);
   const handleMessage = require("./handleMessage");
   socket.on("message", (data) => handleMessage(data, io));
 
@@ -10,22 +9,16 @@ const useSocket = (io, socket) => {
   // socket.on('join-room', (data) => joinRoom(data, socket))
 
   // add user to list of all users
-  socket.on("add_user", data => {
-    console.log("data:", data)
+  socket.on("add_user", (data) => {
     if (data) {
       const userInfo = getTokenInfo(data);
       users[userInfo.userId] = socket.id;
-      console.log("users:", users)
     }
   });
 
-  socket.on('offer', data =>{
-    console.log("users:", users)
-    console.log("users[data.seller_id]:", users[data.seller_id])
-    io.to(users[data.seller_id]).emit("new_offer", data)
-  }
-    // io.to(data.seller_id)
-    )
+  // grab offers from item page on handleOffer
+  const handleOffer = require("./handleOffer");
+  socket.on("offer", (data) => handleOffer(data, users, io));
 };
 
 module.exports = useSocket;
