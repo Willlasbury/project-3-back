@@ -35,7 +35,7 @@ app.use(cors());
 app.use("/", allRoutes);
 
 // start the server
-sequelize.sync({ force: false }).then(function () {
+sequelize.sync({ force: true }).then(function () {
   server.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
