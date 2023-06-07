@@ -1,12 +1,12 @@
 const users = [];
 
-function joinRoom  ({id, username, room}, socket)  {
-  const user = { id, username, room };
+function joinRoom  ({id, userName, room}, socket)  {
+  const user = { id, userName, room };
   users.push(user);
   socket.join(user.room);
   socket.emit(
     "joined",
-    `${user.username} has joined the chat`)
+    `${user.userName} has joined the chat`)
  
 };
 
