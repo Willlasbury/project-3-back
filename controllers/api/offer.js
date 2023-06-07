@@ -41,13 +41,15 @@ router.post("/", async (req, res) => {
   }
 });
 // get all offers for a user
-  // get user from token and search for where offer.items...seller_id is userId from token
+// get user from token and search for where offer.items...seller_id is userId from token
 router.get("/:token", async (req, res) => {
   try {
     const data = getTokenInfo(req.params.token);
-    const dbData = await Offer.findAll({ include: [{ model: Item, where: {seller_id: data.userId} }] });
+    const dbData = await Offer.findAll({
+      include: [{ model: Item, where: { seller_id: data.userId } }],
+    });
     if (dbData.length === 0) {
-        return res.status(200).json({ msg: "no offers in database!" });
+      return res.status(200).json({ msg: "no offers in database!" });
     }
     return res.json(dbData);
   } catch (err) {
