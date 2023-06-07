@@ -15,7 +15,6 @@ const handleOffer = async (data, users, io) => {
 
   const user = await User.findByPk(offererInfo.userId);
   offerData.setOfferer(user);
-
   // send notification to item owner that there is a new offer
   io.to(users[data.item.seller_id]).emit("new_offer", data);
 };

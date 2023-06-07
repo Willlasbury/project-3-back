@@ -76,11 +76,9 @@ Offer.belongsTo(User, {
 
 // OFFER.ITEM KEY
 Item.hasMany(Offer, {
-  as: "Item",
   foreignKey:"item_id"
 });
 Offer.belongsTo(Item, {
-  as: "Item",
   foreignKey:"item_id"
 });
  
