@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Offers in database!" });
     }
-    console.log("dbData:", dbData);
     return res.json(dbData);
   } catch (err) {
     console.log(err);
@@ -45,9 +44,13 @@ router.post("/", async (req, res) => {
 router.get("/recieved/:token", async (req, res) => {
   try {
     const data = getTokenInfo(req.params.token);
-    const dbData = await Offer.findAll({
-      include: [{ model: Item, where: { seller_id: data.userId } }],
-    });
+    const dbData = await Offer.findAll(
+      { where: {accepted: false },
+        include: [
+          { model: Item, where: { seller_id: data.userId} },
+        ],
+      },
+    );
     if (dbData.length === 0) {
       return res.status(200).json({ msg: "no offers in database!" });
     }
@@ -62,12 +65,14 @@ router.get("/sent/:token", async (req, res) => {
   try {
     const data = getTokenInfo(req.params.token);
     const dbData = await Offer.findAll({
-     where: { offerer_id: data.userId }, include: {model: Item}
+      where: { offerer_id: data.userId },
+      include: { model: Item },
     });
     if (dbData.length === 0) {
-      return res.status(200).json({ msg: "You do not currently have any offers out" });
+      return res
+        .status(200)
+        .json({ msg: "You do not currently have any offers out" });
     }
-    console.log("dbData:", dbData)
     return res.json(dbData);
   } catch (err) {
     console.log(err);
