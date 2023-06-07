@@ -27,6 +27,7 @@ const useSocket = (io, socket) => {
     io.to(users[data.offer.offerer_id]).emit("done_deal");
     // adjust item info in db
     // change item to sold status to true and update item.buyer_id to offer.offerer_id
+    //  update item owner for meow
   });
 
   socket.on("decline_offer", (data) => {
