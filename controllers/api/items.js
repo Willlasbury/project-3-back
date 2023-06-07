@@ -82,6 +82,7 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       minimum_trade: req.body.minimum_trade,
       condition: req.body.condition,
+      description: req.body.description,
     };
     //if want to add multiple would have to make a bulk create where urls are added into an array and then mapping over it. Include an array in the request body and if there are multiple photos do a bulk
     const dbData = await Item.create(newItem);
