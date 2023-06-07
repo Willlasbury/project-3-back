@@ -66,11 +66,11 @@ Photo.belongsTo(Item, {
 // OFFER.SELLER KEY
 User.hasMany(Offer, {
   as: "Offerer",
-  foreignKey:"buyer_id"
+  foreignKey:"offerer_id"
 });
 Offer.belongsTo(User, {
   as: "Offerer",
-  foreignKey:"buyer_id"
+  foreignKey:"offerer_id"
 });
 
 
