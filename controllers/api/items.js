@@ -146,6 +146,7 @@ router.put("/:id", async (req, res) => {
         title: req.body.title,
         minimum_trade: req.body.min,
         condition: req.body.condition,
+        description: req.body.description
       },
       {
         where: {
