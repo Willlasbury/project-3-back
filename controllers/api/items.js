@@ -70,6 +70,24 @@ router.get("/photo/:id", async (req, res) => {
     return res.status(500).json({ msg: "could not get user", err: err });
   }
 });
+router.get("/seller/:id", async (req, res) => {
+  try {
+    const dbData = await Item.findAll({
+      include: [{ model: Photo }],
+      where: { seller_id: req.params.id },
+    });
+
+    console.log("===\n\n\ntest\n\n\n===");
+    if (dbData.length === 0) {
+      return res.status(404).json({ msg: "no Items in database!" });
+    }
+    console.log("dbData:", dbData);
+    return res.json(dbData);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "could not get items", err: err });
+  }
+});
 //Create Item
 router.post("/", async (req, res) => {
   try {
