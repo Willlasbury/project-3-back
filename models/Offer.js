@@ -9,6 +9,10 @@ Offer.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    accepted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   },
   {
     sequelize,
