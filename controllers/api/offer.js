@@ -3,7 +3,7 @@ const { Offer, User, Item } = require("../../models");
 
 const getTokenInfo = require("../utils/getTokenInfo");
 
-//Get all offers
+// Get all offers
 router.get("/", async (req, res) => {
   try {
     const dbData = await Offer.findAll();
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: "could not get Offers", err: err });
   }
 });
-//Create an Offer
+// Create an Offer
 router.post("/", async (req, res) => {
   try {
     const offererId = req.body.offerer_id;
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 });
 // get all offers for a user
 // get user from token and search for where offer.items...seller_id is userId from token
-router.get("/:token", async (req, res) => {
+router.get("/recieved/:token", async (req, res) => {
   try {
     const data = getTokenInfo(req.params.token);
     const dbData = await Offer.findAll({
@@ -56,6 +56,36 @@ router.get("/:token", async (req, res) => {
     console.log(err);
     return res.status(500).json({ msg: "could not get offers", err: err });
   }
+});
+
+router.get("/sent/:token", async (req, res) => {
+  try {
+    const data = getTokenInfo(req.params.token);
+    const dbData = await Offer.findAll({
+     where: { offerer_id: data.userId }, include: {model: Item}
+    });
+    if (dbData.length === 0) {
+      return res.status(200).json({ msg: "You do not currently have any offers out" });
+    }
+    console.log("dbData:", dbData)
+    return res.json(dbData);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "could not get offers", err: err });
+  }
+});
+
+// delete offer
+router.delete("/:id", (req, res) => {
+  Offer.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((deletedOffer) => {
+      res.json(deletedOffer);
+    })
+    .catch((err) => res.json(err));
 });
 
 module.exports = router;
