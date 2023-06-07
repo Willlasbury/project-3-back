@@ -61,7 +61,7 @@ router.get("/otherusers/browse", async (req, res) => {
     }
     console.log(dbData.length);
     for(var i =0; i<dbData.length; i++){
-      if(req.body.username === dbData[i].username){
+      if(req.body.userName === dbData[i].userName){
         dbData.splice(i,1);
       }
     }
@@ -75,8 +75,9 @@ router.get("/otherusers/browse", async (req, res) => {
 // Create user/ signup
 router.post("/", async (req, res) => {
   try {
+    console.log("req.body:", req.body)
     const newUser = {
-      username: req.body.username,
+      userName: req.body.userName,
       password: req.body.password,
       email: req.body.email,
     };
@@ -85,7 +86,7 @@ router.post("/", async (req, res) => {
     const token = jwt.sign(
       {
         userId: dbData.id,
-        username: dbData.username,
+        userName: dbData.userName,
       },
       process.env.JWT_SECRET,
       {
@@ -107,7 +108,7 @@ router.post("/", async (req, res) => {
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
-      username: req.body.userName,
+      userName: req.body.userName,
     },
   })
     .then((foundUser) => {
@@ -118,7 +119,7 @@ router.post("/login", (req, res) => {
       } else {
         const token = jwt.sign(
           {
-            username: foundUser.username,
+            userName: foundUser.userName,
             userId: foundUser.id,
           },
           process.env.JWT_SECRET,
@@ -145,7 +146,7 @@ router.post("/login", (req, res) => {
 router.put("/:id", async (req, res) => {
   User.update(
     {
-      username: req.body.username,
+      userName: req.body.userName,
       password: req.body.password,
       email: req.body.email,
     },
