@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt')
 router.get("/", async (req, res) => {
   try {
     const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
-    console.log("dbData:", dbData)
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }
@@ -53,11 +52,9 @@ router.get("/:id", async (req, res) => {
 router.get("/otherusers/browse", async (req, res) => {
   try {
     const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
-    console.log("dbData:", dbData)
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Users in database!" });
     }
-    console.log(dbData.length);
     for(var i =0; i<dbData.length; i++){
       if(req.body.userName === dbData[i].userName){
         dbData.splice(i,1);
