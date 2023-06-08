@@ -5,14 +5,18 @@ class Offer extends Model {}
 
 Offer.init(
   {
-    offer: {
+    offerText: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    offerItem: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     accepted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   },
   {
     sequelize,

@@ -18,7 +18,7 @@ const startSeedin = async () => {
     const photoData = await Photo.bulkCreate(photoSeeds);
     const categoryData = await Category.bulkCreate(categorySeeds);
     const messageData = await Message.bulkCreate(messageSeeds);
-    const offerData = await Offer.bulkCreate(offerSeeds)
+    // const offerData = await Offer.bulkCreate(offerSeeds)
 
     // Assign sellers and buyers
     for (let i = 0; i < itemData.length; i++) {
@@ -61,13 +61,12 @@ const startSeedin = async () => {
       }
     }
 
-    for (let i = 0; i < offerData.length; i++) {
-    const user = await User.findByPk(Math.floor(Math.random() * 9)+1);
-    const item = await Item.findByPk(Math.floor(Math.random() * 9)+1);
-    await offerData[i].setOfferer(user)
-    await offerData[i].setItem(item)
-    }
-
+    // for (let i = 0; i < offerData.length; i++) {
+    //   const user = await User.findByPk(Math.floor(Math.random() * 9) + 1);
+    //   const item = await Item.findByPk(Math.floor(Math.random() * 9) + 1);
+    //   await offerData[i].setOfferer(user);
+    //   await offerData[i].setItem(item);
+    // }
 
     process.exit(0);
   } catch (err) {
