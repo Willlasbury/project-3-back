@@ -1,14 +1,17 @@
 const offer = [
-  { offer: "stuff" },
-  { offer: "cooler stuff" },
-  { offer: "big stuff" },
-  { offer: "a watch" },
-  { offer: "my first born" },
-  { offer: "bellows" },
-  { offer: "a brand new car" },
-  { offer: "my soul" },
-  { offer: "nothing" },
-  { offer: "less than nothing" },
+  { offerItem: "stuff", offerText: "a big description of my stuff" },
+  { offerItem: "cooler stuff", offerText: "a big description of my stuff" },
+  { offerItem: "big stuff", offerText: "a big description of my stuff" },
+  { offerItem: "a watch", offerText: "a big description of my stuff" },
+  { offerItem: "my first born", offerText: "a big description of my stuff" },
+  { offerItem: "bellows", offerText: "a big description of my stuff" },
+  { offerItem: "a brand new car", offerText: "a big description of my stuff" },
+  { offerItem: "my soul", offerText: "a big description of my stuff" },
+  { offerItem: "nothing", offerText: "a big description of my stuff" },
+  {
+    offerItem: "less than nothing",
+    offerText: "a big description of my stuff",
+  },
 ];
 
 module.exports = offer;
