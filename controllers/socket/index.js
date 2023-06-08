@@ -21,21 +21,11 @@ const useSocket = (io, socket) => {
   const handleOffer = require("./handleOffer");
   socket.on("offer", (data) => handleOffer(data, users, io));
 
-  const acceptOffer = require('./acceptOffer')
-  socket.on("accept_offer", (data => acceptOffer(data, users, io)));
+  const acceptOffer = require("./acceptOffer");
+  socket.on("accept_offer", (data) => acceptOffer(data, users, socket, io));
 
-  socket.on("decline_offer", async (data) => {
-    // adjust offer info in db
-    console.log("data.offer:", data.offer);
-    // delete an offer
-    const res = await Offer.destroy({ where: { id: data.offer.id } });
-
-    // send notification to offerer
-    // TODO: handle store message if user is not online
-    // Message.create()
-    // io.to(users[data.offer.offerer_id]).emit("no_deal");
-    socket.emit("decline_res", res);
-  });
+  const declineOffer = require("./declineOffer");
+  socket.on("decline_offer", data => declineOffer(data, users, socket, io));
 };
 
 module.exports = useSocket;
