@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
       include: [{ model: Photo }],
     });
 
-    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
@@ -27,7 +26,6 @@ router.get("/browse", async (req, res) => {
       where: { sold_status: false },
     });
 
-    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
@@ -77,7 +75,6 @@ router.get("/seller/:id", async (req, res) => {
       where: { seller_id: req.params.id },
     });
 
-    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }

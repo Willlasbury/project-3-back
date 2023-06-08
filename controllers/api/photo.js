@@ -4,7 +4,6 @@ const {Photo, User, Item} = require("../../models");
 router.get("/", async (req, res) => {
     try {
       const dbData = await Photo.findAll();
-      console.log("===\n\n\ntest\n\n\n===");
       if (dbData.length === 0) {
         return res.status(404).json({ msg: "no photos in database!" });
       }
