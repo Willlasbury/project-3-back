@@ -5,7 +5,6 @@ const {Category,Item, Photo} = require('../../models')
 router.get("/", async (req, res) => {
     try {
       const dbData = await Category.findAll({include: [{model:Item, include: [Photo]}]});
-      console.log("===\n\n\ntest\n\n\n===");
       if (dbData.length === 0) {
         return res.status(404).json({ msg: "no Categories in database!" });
       }

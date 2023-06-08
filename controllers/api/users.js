@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt')
 // Get all users
 router.get("/", async (req, res) => {
   try {
-    console.log('===\n\n\ntest\n\n\n===')
     const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
     console.log("dbData:", dbData)
     if (dbData.length === 0) {
@@ -53,7 +52,6 @@ router.get("/:id", async (req, res) => {
 //Get items from other users, but not current user on browse page
 router.get("/otherusers/browse", async (req, res) => {
   try {
-    console.log('===\n\n\ntest\n\n\n===')
     const dbData = await User.findAll({include: [{model: Item, as: "Seller", include: [Photo]}]});
     console.log("dbData:", dbData)
     if (dbData.length === 0) {
