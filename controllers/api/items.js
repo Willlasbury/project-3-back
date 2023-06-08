@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Item, User, Category, Photo } = require("../../models/");
-const jwt = require("jsonwebtoken");
+const getTokenInfo = require('../utils/getTokenInfo')
 
 // Get all items
 router.get("/", async (req, res) => {
@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
-    console.log("dbData:", dbData);
     return res.json(dbData);
   } catch (err) {
     console.log(err);
@@ -29,7 +28,6 @@ router.get("/browse", async (req, res) => {
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
-    console.log("dbData:", dbData);
     return res.json(dbData);
   } catch (err) {
     console.log(err);
@@ -78,7 +76,6 @@ router.get("/seller/:id", async (req, res) => {
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
-    console.log("dbData:", dbData);
     return res.json(dbData);
   } catch (err) {
     console.log(err);
@@ -88,9 +85,10 @@ router.get("/seller/:id", async (req, res) => {
 //Create Item
 router.post("/", async (req, res) => {
   try {
-    const sellerId = req.body.seller_id;
-    const user = await User.findByPk(sellerId);
-    const categoryId = req.body.category_id;
+    const token = getTokenInfo(req.body.token)
+ 
+    const user = await User.findByPk(token.userId);
+    const categoryId = req.body.category;
     const category = await Category.findByPk(categoryId);
 
     const newItem = {
@@ -101,25 +99,17 @@ router.post("/", async (req, res) => {
     };
     //if want to add multiple would have to make a bulk create where urls are added into an array and then mapping over it. Include an array in the request body and if there are multiple photos do a bulk
     const dbData = await Item.create(newItem);
-    console.log("dbData:", dbData)
+
     dbData.setSeller(user);
     dbData.setCategory(category);
-    const photoArr = [];
-    const newPhoto = {
-      url: req.body.url,
-      item_id: dbData.id,
-    };
-    const token = req.body.token;
+    const photoUrls = req.body.url
 
-    const myData = req.body.url.map(async (url) => {
-      console.log("url:", url);
+    const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
-      console.log("photo:", photo);
-
-      photo.setItem(dbData);
+      await photo.setItem(dbData);
     });
 
-    const dbPhotoData = await Photo.create(newPhoto);
+    // const dbPhotoData = await Photo.create(newPhoto);
     dbData.setCategory(category);
 
     return res.json({

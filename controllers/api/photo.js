@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
       if (dbData.length === 0) {
         return res.status(404).json({ msg: "no photos in database!" });
       }
-      console.log("dbData:", dbData);
       return res.json(dbData);
     } catch (err) {
       console.log(err);
