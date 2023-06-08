@@ -55,13 +55,9 @@ Category.hasMany(Item);
 Item.belongsTo(Category);
 
 // PHOTO.ITEM KEY
-Item.hasMany(Photo, {
-  foreignKey: "item_id",
-});
+Item.hasMany(Photo);
 
-Photo.belongsTo(Item, {
-  foreignKey: "item_id",
-});
+Photo.belongsTo(Item);
 
 // OFFER.SELLER KEY
 User.hasMany(Offer, {
@@ -75,11 +71,7 @@ Offer.belongsTo(User, {
 
 
 // OFFER.ITEM KEY
-Item.hasMany(Offer, {
-  foreignKey:"item_id"
-});
-Offer.belongsTo(Item, {
-  foreignKey:"item_id"
-});
+Item.hasMany(Offer);
+Offer.belongsTo(Item);
  
 module.exports = { User, Item, Photo, Category, Message, Offer };
