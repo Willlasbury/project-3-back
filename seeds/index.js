@@ -62,12 +62,11 @@ const startSeedin = async () => {
     }
 
     for (let i = 0; i < offerData.length; i++) {
-    const user = await User.findByPk(Math.floor(Math.random() * 9)+1);
-    const item = await Item.findByPk(Math.floor(Math.random() * 9)+1);
-    await offerData[i].setOfferer(user)
-    await offerData[i].setItem(item)
+      const user = await User.findByPk(Math.floor(Math.random() * 9) + 1);
+      const item = await Item.findByPk(Math.floor(Math.random() * 9) + 1);
+      await offerData[i].setOfferer(user);
+      await offerData[i].setItem(item);
     }
-
 
     process.exit(0);
   } catch (err) {
