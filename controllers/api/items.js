@@ -21,9 +21,6 @@ router.get("/", async (req, res) => {
 });
 router.get("/browse/:userId", async (req, res) => {
   try {
-    console.log("=====\n\nTEST\n\n\n======");
-    console.log("req.params.userId:", req.params.userId);
-    console.log("=====\n\nTEST\n\n\n======");
     const dbData = await Item.findAll({
       include: [{ model: Photo }],
       where: { sold_status: false, seller_id: { [Op.ne]: req.params.userId } },
@@ -106,7 +103,8 @@ router.post("/", async (req, res) => {
     dbData.setSeller(user);
     dbData.setCategory(category);
     const photoUrls = req.body.url;
-
+    console.log("req.body.url:", req.body.url)
+    console.log("photoUrls:", photoUrls)
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
       await photo.setItem(dbData);
@@ -158,7 +156,6 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ msg: "no task with this id in database!" });
     }
     const item = await Item.findByPk(req.params.id);
-    console.log(editItem);
     item.setBuyer(user);
     item.setCategory(category);
     res.json(editItem);
