@@ -24,8 +24,8 @@ const useSocket = (io, socket) => {
   const acceptOffer = require("./acceptOffer");
   socket.on("accept_offer", (data) => acceptOffer(data, users, socket, io));
 
-  const declineOffer = require("./declineOffer");
-  socket.on("decline_offer", data => declineOffer(data, users, socket, io));
+  // const declineOffer = require("./declineOffer");
+  // socket.on("decline_offer", data => declineOffer(data, users, socket, io));
 };
 
 module.exports = useSocket;

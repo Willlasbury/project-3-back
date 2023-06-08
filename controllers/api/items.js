@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Item, User, Category, Photo } = require("../../models/");
-const getTokenInfo = require('../utils/getTokenInfo')
+const { Op } = require("sequelize");
+const getTokenInfo = require("../utils/getTokenInfo");
 
 // Get all items
 router.get("/", async (req, res) => {
@@ -18,13 +19,15 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: "could not get items", err: err });
   }
 });
-router.get("/browse", async (req, res) => {
+router.get("/browse/:userId", async (req, res) => {
   try {
+    console.log("=====\n\nTEST\n\n\n======");
+    console.log("req.params.userId:", req.params.userId);
+    console.log("=====\n\nTEST\n\n\n======");
     const dbData = await Item.findAll({
       include: [{ model: Photo }],
-      where: { sold_status: false },
+      where: { sold_status: false, seller_id: { [Op.ne]: req.params.userId } },
     });
-
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
@@ -85,8 +88,8 @@ router.get("/seller/:id", async (req, res) => {
 //Create Item
 router.post("/", async (req, res) => {
   try {
-    const token = getTokenInfo(req.body.token)
- 
+    const token = getTokenInfo(req.body.token);
+
     const user = await User.findByPk(token.userId);
     const categoryId = req.body.category;
     const category = await Category.findByPk(categoryId);
@@ -102,7 +105,7 @@ router.post("/", async (req, res) => {
 
     dbData.setSeller(user);
     dbData.setCategory(category);
-    const photoUrls = req.body.url
+    const photoUrls = req.body.url;
 
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
@@ -134,7 +137,7 @@ router.put("/:id", async (req, res) => {
         title: req.body.title,
         minimum_trade: req.body.min,
         condition: req.body.condition,
-        description: req.body.description
+        description: req.body.description,
       },
       {
         where: {
@@ -142,6 +145,15 @@ router.put("/:id", async (req, res) => {
         },
       }
     );
+    const photoUrls = req.body.url;
+
+    const myData = photoUrls.map(async (url) => {
+      const photo = await Photo.update({
+        url: url,
+        where: { seller_id: req.params.id },
+      });
+      await photo.setItem(dbData);
+    });
     if (!editItem[0]) {
       return res.status(404).json({ msg: "no task with this id in database!" });
     }
