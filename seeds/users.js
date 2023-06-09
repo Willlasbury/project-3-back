@@ -1,5 +1,11 @@
 users = [
   {
+    userName: "test",
+    password: "password",
+    email: "chris@chris.chris",
+    seller_rating: 1,
+  },
+  {
     userName: "Chris",
     password: "password",
     email: "chris@chris.chris",
