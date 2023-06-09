@@ -85,7 +85,7 @@ router.post("/", async (req, res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "2h",
+        expiresIn: "4d",
       }
     );
       const revealToken = jwt.verify(token, process.env.JWT_SECRET)
@@ -119,7 +119,7 @@ router.post("/login", (req, res) => {
           },
           process.env.JWT_SECRET,
           {
-            expiresIn: "2h",
+            expiresIn: "4d",
           }
         );
         return res.json({
