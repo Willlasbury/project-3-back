@@ -8,7 +8,7 @@ Photo.init(
     // add properites here, ex:
     url: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
     item_id: {
