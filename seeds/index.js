@@ -18,7 +18,7 @@ const startSeedin = async () => {
     const photoData = await Photo.bulkCreate(photoSeeds);
     const categoryData = await Category.bulkCreate(categorySeeds);
     const messageData = await Message.bulkCreate(messageSeeds);
-    const offerData = await Offer.bulkCreate(offerSeeds)
+    const offerData = await Offer.bulkCreate(offerSeeds);
 
     // Assign sellers and buyers
     for (let i = 0; i < itemData.length; i++) {
@@ -36,13 +36,13 @@ const startSeedin = async () => {
         await itemData[i].setBuyer(buyer);
       }
     }
-
+    console.log("=====\n\nTEST\n\n\n======");
     // assign random items to photos
     for (let i = 0; i < photoData.length; i++) {
-      const item = await Item.findByPk(Math.floor(Math.random() * 9) + 1);
+      const item = await Item.findByPk(i);
       await photoData[i].setItem(item);
     }
-
+    console.log("=====\n\nTEST\n\n\n======");
     // assign random senders and recipients to messages
     for (let i = 0; i < messageData.length; i++) {
       let randNum;
