@@ -1,8 +1,9 @@
 const { Server } = require("socket.io");
 
 // Change client URL as necessary
-// const URL = process.env.CLIENT_URL;
-const URL = "http://localhost:3000";
+const URL = process.env.CLIENT_URL;
+// const URL = "http://localhost:3000";
+// const URL = "https://traderz-post.netlify.app";
 
 // deployment url
 // const URL = 'https://traderz-post.netlify.app/'
