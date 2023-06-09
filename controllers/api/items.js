@@ -143,18 +143,25 @@ router.put("/:id", async (req, res) => {
         },
       }
     );
+    
     const photoUrls = req.body.url;
 
-    const myData = photoUrls.map(async (url) => {
-      const photo = await Photo.update({
-        url: url,
-        where: { seller_id: req.params.id },
-      });
-      await photo.setItem(dbData);
+    const photos = await Photo.findAll({ where: { ItemId: req.params.id } });
+
+    if (photos[0]) {
+      await Photo.destroy({ where: { ItemId: req.params.id } });
+    }
+
+    photoUrls.map(async (url) => {
+      const photo = await Photo.create({ url: url });
+      const item = await Item.findByPk(req.params.id)
+      photo.setItem(req.params.id);
     });
+
     if (!editItem[0]) {
       return res.status(404).json({ msg: "no task with this id in database!" });
     }
+    
     const item = await Item.findByPk(req.params.id);
     item.setBuyer(user);
     item.setCategory(category);
