@@ -1,13 +1,12 @@
 items = [
   {
-    title: "lawn mower",
+    title: "Wallet",
     minimum_trade: 5,
-    category: "outdoors",
     condition: "used",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "A used hipster wallet. Once of the few that does not include space for a bitcoin usb drive.",
   },
   {
     title: "leaf blower",
@@ -30,57 +29,56 @@ items = [
       "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
   },
   {
-    title: "bitcoin usb",
+    title: "Tan hat",
     minimum_trade: 10,
-    category: "electronics",
     condition: "like new",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "When you are out on the farm or just traveling from town to town, this hat will keep you out of the sun.",
   },
   {
-    title: "car",
+    title: "Wagon",
     minimum_trade: 5,
     category: "automotive",
     condition: "heavily used",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "The perfect mode of transportation for heading out west. Just look out for the Oregon trail!",
   },
   {
-    title: "kitchen sink",
+    title: "Boots",
     minimum_trade: 2,
-    category: "home",
-    condition: "new",
+    category: "appearal",
+    condition: "heavily used",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "Was the perfect travel companions for hiking the pacific crest trail but I have to hange them up now as I got a corporate job that allowed me to sell my soul for money.",
   },
   {
-    title: "shirt",
+    title: "Tractor",
     minimum_trade: 1,
-    category: "clothing",
+    category: "automotive",
     condition: "used",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "The perfect farm partner equipped with the state of the art food harvesting technology.",
   },
   {
-    title: "a penny",
+    title: "Western Saddle",
     minimum_trade: 10,
     category: "other",
     condition: "like new",
     photo: null,
     sold_status: false,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "A man's best friend when he is out exploring the old west. With the sun at his back and potential opportunity ahead there can be no greater place to be.",
   },
   {
-    title: "monitor",
+    title: "Leather Bag",
     minimum_trade: 7,
     category: "electronics",
     condition: "used",
@@ -88,10 +86,10 @@ items = [
     sold_status: false,
     item_id: 1,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "A great way to let everyone know you are bougie and are most likely walking around with expensive things. A perfect beacon to all would-be muggers.",
   },
   {
-    title: "Dewalt drill",
+    title: "Another Leather Bag",
     minimum_trade: 4,
     category: "tools",
     condition: "used",
@@ -99,7 +97,60 @@ items = [
     sold_status: false,
     item_id: 1,
     description:
-      "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
+      "Much more subtle than some other leather bags. This one screams that you could be secret millionaire or that you could potentially sleep in your car with you dog.",
+  },
+  {
+    title: "Coffee",
+    minimum_trade: 1,
+    category: "clothing",
+    condition: "used",
+    photo: null,
+    sold_status: false,
+    description:
+      "The best an only way to way up in the morning. Simultaneously this is the only acceptable addiction in modern society besides social media, and shopping.",
+  },
+  {
+    title: "Lasso",
+    minimum_trade: 10,
+    category: "other",
+    condition: "like new",
+    photo: null,
+    sold_status: false,
+    description:
+      "Man's third best friend behind his dog and his hat. This trusty tool like the best way to announce that you're rustic and interesting even when you're not.",
+  },
+  {
+    title: "Binoculars",
+    minimum_trade: 7,
+    category: "electronics",
+    condition: "used",
+    photo: null,
+    sold_status: false,
+    item_id: 1,
+    description:
+      "The best way to look ahead and see how bright your future is.",
+  },
+  {
+    title: "Binoculars",
+    minimum_trade: 7,
+    category: "electronics",
+    condition: "used",
+    photo: null,
+    sold_status: false,
+    item_id: 1,
+    description:
+      "The best way to look ahead and see how bright your future is.",
+  },
+  {
+    title: "Binoculars",
+    minimum_trade: 7,
+    category: "electronics",
+    condition: "used",
+    photo: null,
+    sold_status: false,
+    item_id: 1,
+    description:
+      "The best way to look ahead and see how bright your future is.",
   },
 ];
 
