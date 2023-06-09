@@ -103,8 +103,6 @@ router.post("/", async (req, res) => {
     dbData.setSeller(user);
     dbData.setCategory(category);
     const photoUrls = req.body.url;
-    console.log("req.body.url:", req.body.url)
-    console.log("photoUrls:", photoUrls)
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
       await photo.setItem(dbData);
@@ -161,7 +159,7 @@ router.put("/:id", async (req, res) => {
     if (!editItem[0]) {
       return res.status(404).json({ msg: "no task with this id in database!" });
     }
-    
+
     const item = await Item.findByPk(req.params.id);
     item.setBuyer(user);
     item.setCategory(category);
