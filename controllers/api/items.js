@@ -103,14 +103,17 @@ router.post("/", async (req, res) => {
 
     dbData.setSeller(user);
     dbData.setCategory(category);
+    console.log('===\n\n\ntest\n\n\n===')
+    console.log("req.body:", req.body)
     const photoUrls = req.body.url;
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
       await photo.setItem(dbData);
     });
-
+    
     // const dbPhotoData = await Photo.create(newPhoto);
     dbData.setCategory(category);
+    console.log('===\n\n\ntest\n\n\n===')
 
     return res.json({
       item: dbData,
