@@ -9,6 +9,7 @@ const categories = [
     {name: 'Automotive'},
     {name: 'Bicycle'},
     {name: 'Sports'},
+    {name: "appearal"}
 ]
 
 module.exports = categories
