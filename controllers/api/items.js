@@ -19,11 +19,12 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: "could not get items", err: err });
   }
 });
-router.get("/browse/:userId", async (req, res) => {
+router.get("/browse/:token", async (req, res) => {
   try {
+    const tokenInfo = getTokenInfo(req.params.token)
     const dbData = await Item.findAll({
       include: [{ model: Photo }],
-      where: { sold_status: false, seller_id: { [Op.ne]: req.params.userId } },
+      where: { sold_status: false, seller_id: { [Op.ne]: tokenInfo.userId } },
     });
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
@@ -102,14 +103,17 @@ router.post("/", async (req, res) => {
 
     dbData.setSeller(user);
     dbData.setCategory(category);
+    console.log('===\n\n\ntest\n\n\n===')
+    console.log("req.body:", req.body)
     const photoUrls = req.body.url;
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
       await photo.setItem(dbData);
     });
-
+    
     // const dbPhotoData = await Photo.create(newPhoto);
     dbData.setCategory(category);
+    console.log('===\n\n\ntest\n\n\n===')
 
     return res.json({
       item: dbData,

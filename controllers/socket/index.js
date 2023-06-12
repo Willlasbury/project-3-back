@@ -14,6 +14,9 @@ const useSocket = (io, socket) => {
     if (data) {
       const userInfo = getTokenInfo(data);
       users[userInfo.userId] = socket.id;
+      console.log('===\n\n\ntest\n\n\n===')
+      console.log("index users:", users)
+      console.log('===\n\n\ntest\n\n\n===')
     }
   });
 
@@ -23,7 +26,7 @@ const useSocket = (io, socket) => {
 
   const acceptOffer = require("./acceptOffer");
   socket.on("accept_offer", (data) => acceptOffer(data, users, socket, io));
-
+  console.log("users:", users)
   const declineOffer = require("./declineOffer");
   socket.on("decline_offer", (data) => declineOffer(data, users, socket, io));
 };
