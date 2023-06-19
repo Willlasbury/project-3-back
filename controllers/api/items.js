@@ -22,11 +22,18 @@ router.get("/", async (req, res) => {
 
 router.get("/browse/:token", async (req, res) => {
   try {
-    const tokenInfo = getTokenInfo(req.params.token)
+    const tokenInfo = getTokenInfo(req.params.token);
     const dbData = await Item.findAll({
-      include: [{ model: Photo }],
+      include: [
+        { model: Photo },
+        { model: User, as: "Seller" },
+        { model: Category},
+      ],
       where: { sold_status: false, seller_id: { [Op.ne]: tokenInfo.userId } },
     });
+    console.log("===\n\n\ntest\n\n\n===");
+    console.log("dbData:", dbData);
+    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
@@ -42,9 +49,9 @@ router.get("/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
     const dbData = await Item.findByPk(itemId, { include: [{ model: Photo }] });
-    console.log('===\n\n\ntest\n\n\n===')
-    console.log("dbData:", dbData)
-    console.log('===\n\n\ntest\n\n\n===')
+    console.log("===\n\n\ntest\n\n\n===");
+    console.log("dbData:", dbData);
+    console.log("===\n\n\ntest\n\n\n===");
     if (!dbData) {
       return res.status(404).json({ msg: "Item not found!" });
     }
@@ -113,7 +120,7 @@ router.post("/", async (req, res) => {
       const photo = await Photo.create({ url: url });
       await photo.setItem(dbData);
     });
-    
+
     // const dbPhotoData = await Photo.create(newPhoto);
     dbData.setCategory(category);
 
@@ -147,7 +154,7 @@ router.put("/:id", async (req, res) => {
         },
       }
     );
-    
+
     const photoUrls = req.body.url;
 
     const photos = await Photo.findAll({ where: { ItemId: req.params.id } });
@@ -158,7 +165,7 @@ router.put("/:id", async (req, res) => {
 
     photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
-      const item = await Item.findByPk(req.params.id)
+      const item = await Item.findByPk(req.params.id);
       photo.setItem(req.params.id);
     });
 
