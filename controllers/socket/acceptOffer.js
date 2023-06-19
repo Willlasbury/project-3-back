@@ -28,11 +28,6 @@ async function acceptOffer(data, users, socket, io) {
     newMessage.setSender(seller)
     newMessage.setRecipient(buyer)
 
-      // console.log('===\n\n\ntest\n\n\n===')
-      // console.log("users:", users)
-      // console.log("data.offer.offer_id:", data)
-      // console.log("users[]:", users[data.offer.offerer_id])
-      
     io.to(users[data.offer.offerer_id]).emit("done_deal");
     socket.emit("accept_res");
   } catch (error) {

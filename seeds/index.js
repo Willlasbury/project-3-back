@@ -36,30 +36,28 @@ const startSeedin = async () => {
         await itemData[i].setBuyer(buyer);
       }
     }
-    console.log("=====\n\nTEST\n\n\n======");
     // assign random items to photos
     for (let i = 0; i < photoData.length; i++) {
       const item = await Item.findByPk(i);
       await photoData[i].setItem(item);
     }
-    console.log("=====\n\nTEST\n\n\n======");
     // assign random senders and recipients to messages
-    for (let i = 0; i < messageData.length; i++) {
-      let randNum;
-      let diffNum;
-      while (randNum === diffNum) {
-        randNum = Math.floor(Math.random() * 9) + 1;
-        diffNum = Math.floor(Math.random() * 9) + 1;
-      }
-      const sender = await User.findByPk(randNum);
-      const recipient = await User.findByPk(diffNum);
-      await messageData[i].setSender(sender);
-      if (i <= 4) {
-        await messageData[i].setRecipient(4);
-      } else {
-        await messageData[i].setRecipient(recipient);
-      }
-    }
+    // for (let i = 0; i < messageData.length; i++) {
+    //   let randNum;
+    //   let diffNum;
+    //   while (randNum === diffNum) {
+    //     randNum = Math.floor(Math.random() * 9) + 1;
+    //     diffNum = Math.floor(Math.random() * 9) + 1;
+    //   }
+    //   const sender = await User.findByPk(randNum);
+    //   const recipient = await User.findByPk(diffNum);
+    //   await messageData[i].setSender(sender);
+    //   if (i <= 4) {
+    //     await messageData[i].setRecipient(4);
+    //   } else {
+    //     await messageData[i].setRecipient(recipient);
+    //   }
+    // }
 
     for (let i = 0; i < offerData.length; i++) {
       const user = await User.findByPk(Math.floor(Math.random() * 9) + 1);

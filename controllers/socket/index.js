@@ -14,9 +14,6 @@ const useSocket = (io, socket) => {
     if (data) {
       const userInfo = getTokenInfo(data);
       users[userInfo.userId] = socket.id;
-      console.log('===\n\n\ntest\n\n\n===')
-      console.log("index users:", users)
-      console.log('===\n\n\ntest\n\n\n===')
     }
   });
 
