@@ -27,7 +27,7 @@ router.get("/browse/:token", async (req, res) => {
       include: [
         { model: Photo },
         { model: User, as: "Seller" },
-        { model: Category},
+        { model: Category },
       ],
       where: { sold_status: false, seller_id: { [Op.ne]: tokenInfo.userId } },
     });
@@ -76,11 +76,16 @@ router.get("/photo/:id", async (req, res) => {
     return res.status(500).json({ msg: "could not get user", err: err });
   }
 });
-router.get("/seller/:id", async (req, res) => {
+router.get("/seller/:token", async (req, res) => {
   try {
+    const tokenInfo = getTokenInfo(req.params.token);
     const dbData = await Item.findAll({
-      include: [{ model: Photo }],
-      where: { seller_id: req.params.id },
+      include: [
+        { model: Photo },
+        { model: User, as: "Seller" },
+        { model: Category },
+      ],
+      where: { seller_id: tokenInfo.userId },
     });
 
     if (dbData.length === 0) {
