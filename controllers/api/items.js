@@ -31,9 +31,6 @@ router.get("/browse/:token", async (req, res) => {
       ],
       where: { sold_status: false, seller_id: { [Op.ne]: tokenInfo.userId } },
     });
-    console.log("===\n\n\ntest\n\n\n===");
-    console.log("dbData:", dbData);
-    console.log("===\n\n\ntest\n\n\n===");
     if (dbData.length === 0) {
       return res.status(404).json({ msg: "no Items in database!" });
     }
