@@ -119,39 +119,6 @@ items = [
     description:
       "Man's third best friend behind his dog and his hat. This trusty tool like the best way to announce that you're rustic and interesting even when you're not.",
   },
-  {
-    title: "Binoculars",
-    minimum_trade: 7,
-    category: "electronics",
-    condition: "used",
-    photo: null,
-    sold_status: false,
-    item_id: 1,
-    description:
-      "The best way to look ahead and see how bright your future is.",
-  },
-  {
-    title: "Binoculars",
-    minimum_trade: 7,
-    category: "electronics",
-    condition: "used",
-    photo: null,
-    sold_status: false,
-    item_id: 1,
-    description:
-      "The best way to look ahead and see how bright your future is.",
-  },
-  {
-    title: "Binoculars",
-    minimum_trade: 7,
-    category: "electronics",
-    condition: "used",
-    photo: null,
-    sold_status: false,
-    item_id: 1,
-    description:
-      "The best way to look ahead and see how bright your future is.",
-  },
 ];
 
 module.exports = items;

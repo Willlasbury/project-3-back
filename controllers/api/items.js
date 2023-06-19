@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: "could not get items", err: err });
   }
 });
+
 router.get("/browse/:token", async (req, res) => {
   try {
     const tokenInfo = getTokenInfo(req.params.token)
@@ -35,12 +36,15 @@ router.get("/browse/:token", async (req, res) => {
     return res.status(500).json({ msg: "could not get items", err: err });
   }
 });
+
 // Get item by id
 router.get("/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
     const dbData = await Item.findByPk(itemId, { include: [{ model: Photo }] });
-
+    console.log('===\n\n\ntest\n\n\n===')
+    console.log("dbData:", dbData)
+    console.log('===\n\n\ntest\n\n\n===')
     if (!dbData) {
       return res.status(404).json({ msg: "Item not found!" });
     }
@@ -50,6 +54,7 @@ router.get("/:id", async (req, res) => {
     return res.status(500).json({ msg: "could not get user", err: err });
   }
 });
+
 //get photo
 router.get("/photo/:id", async (req, res) => {
   try {
@@ -103,8 +108,6 @@ router.post("/", async (req, res) => {
 
     dbData.setSeller(user);
     dbData.setCategory(category);
-    console.log('===\n\n\ntest\n\n\n===')
-    console.log("req.body:", req.body)
     const photoUrls = req.body.url;
     const myData = photoUrls.map(async (url) => {
       const photo = await Photo.create({ url: url });
@@ -113,7 +116,6 @@ router.post("/", async (req, res) => {
     
     // const dbPhotoData = await Photo.create(newPhoto);
     dbData.setCategory(category);
-    console.log('===\n\n\ntest\n\n\n===')
 
     return res.json({
       item: dbData,
