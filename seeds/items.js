@@ -3,7 +3,6 @@ items = [
     title: "Wallet",
     minimum_trade: 5,
     condition: "used",
-    photo: null,
     sold_status: false,
     description:
       "A used hipster wallet. Once of the few that does not include space for a bitcoin usb drive.",
@@ -13,7 +12,6 @@ items = [
     minimum_trade: 2,
     category: "outdoors",
     condition: "used",
-    photo: null,
     sold_status: true,
     description:
       "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
@@ -23,7 +21,6 @@ items = [
     minimum_trade: 6,
     category: "electronics",
     condition: "new",
-    photo: null,
     sold_status: true,
     description:
       "Officia reprehenderit eu laborum non. Nostrud eiusmod officia Lorem velit excepteur quis labore est aute ad sint. Est in laborum ut tempor elit excepteur dolor eiusmod cupidatat ipsum et.",
@@ -32,7 +29,6 @@ items = [
     title: "Tan hat",
     minimum_trade: 10,
     condition: "like new",
-    photo: null,
     sold_status: false,
     description:
       "When you are out on the farm or just traveling from town to town, this hat will keep you out of the sun.",
@@ -42,7 +38,6 @@ items = [
     minimum_trade: 5,
     category: "automotive",
     condition: "heavily used",
-    photo: null,
     sold_status: false,
     description:
       "The perfect mode of transportation for heading out west. Just look out for the Oregon trail!",
@@ -52,7 +47,6 @@ items = [
     minimum_trade: 2,
     category: "appearal",
     condition: "heavily used",
-    photo: null,
     sold_status: false,
     description:
       "Was the perfect travel companions for hiking the pacific crest trail but I have to hange them up now as I got a corporate job that allowed me to sell my soul for money.",
@@ -62,7 +56,6 @@ items = [
     minimum_trade: 1,
     category: "automotive",
     condition: "used",
-    photo: null,
     sold_status: false,
     description:
       "The perfect farm partner equipped with the state of the art food harvesting technology.",
@@ -72,7 +65,6 @@ items = [
     minimum_trade: 10,
     category: "other",
     condition: "like new",
-    photo: null,
     sold_status: false,
     description:
       "A man's best friend when he is out exploring the old west. With the sun at his back and potential opportunity ahead there can be no greater place to be.",
@@ -82,7 +74,6 @@ items = [
     minimum_trade: 7,
     category: "electronics",
     condition: "used",
-    photo: null,
     sold_status: false,
     item_id: 1,
     description:
@@ -93,7 +84,6 @@ items = [
     minimum_trade: 4,
     category: "tools",
     condition: "used",
-    photo: null,
     sold_status: false,
     item_id: 1,
     description:
@@ -104,7 +94,6 @@ items = [
     minimum_trade: 1,
     category: "clothing",
     condition: "used",
-    photo: null,
     sold_status: false,
     description:
       "The best an only way to way up in the morning. Simultaneously this is the only acceptable addiction in modern society besides social media, and shopping.",
@@ -114,7 +103,6 @@ items = [
     minimum_trade: 10,
     category: "other",
     condition: "like new",
-    photo: null,
     sold_status: false,
     description:
       "Man's third best friend behind his dog and his hat. This trusty tool like the best way to announce that you're rustic and interesting even when you're not.",
