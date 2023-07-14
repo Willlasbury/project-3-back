@@ -22,7 +22,7 @@ const startSeedin = async () => {
 
     // Assign sellers and buyers
     for (let i = 0; i < itemData.length; i++) {
-      const user = await User.findByPk(Math.floor(Math.random() * 9) + 1);
+      const user = await User.findByPk(Math.floor(Math.random() * 2) + 1);
       await itemData[i].setSeller(user);
 
       const category = await Category.findByPk(

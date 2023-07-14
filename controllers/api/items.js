@@ -45,10 +45,13 @@ router.get("/browse/:token", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
-    const dbData = await Item.findByPk(itemId, { include: [{ model: Photo }] });
-    console.log("===\n\n\ntest\n\n\n===");
-    console.log("dbData:", dbData);
-    console.log("===\n\n\ntest\n\n\n===");
+    const dbData = await Item.findByPk(itemId, {
+      include: [
+        { model: Photo },
+        { model: User, as: "Seller" },
+        { model: Category },
+      ],
+    });
     if (!dbData) {
       return res.status(404).json({ msg: "Item not found!" });
     }
